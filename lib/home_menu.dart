@@ -25,34 +25,39 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey,
-          title: Text("NEWS"),
-        ),
-        body: FutureBuilder(
-            future: _mainP?.fetchNews(),
-            builder: (BuildContext context, AsyncSnapshot<ApiResponse> snapshot) {
-              if (snapshot.data?.status == Status.LOADING) {
-                return CircularProgressIndicator();
-              }
-              if (snapshot.data?.status == Status.ERROR) {
-                return Center(
-                  child: Text(snapshot.data!.massage!),
-                );
-              }
-              if (snapshot.data?.status == Status.SUCCESS) {
-                return ListView.builder(
-                  itemCount: snapshot.data?.data!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == 4) print("AAA ${snapshot.data?.data[index]}");
+      appBar: AppBar(
+        backgroundColor: Colors.grey,
+        title: Text("NEWS"),
+      ),
+      body: FutureBuilder(
+        future: _mainP?.fetchNews(),
+        builder: (BuildContext context, AsyncSnapshot<ApiResponse> snapshot) {
+          if (snapshot.data?.status == Status.LOADING) {
+            return CircularProgressIndicator();
+          }
+          if (snapshot.data?.status == Status.ERROR) {
+            return Center(
+              child: Text(snapshot.data!.message!),
+            );
+          }
+          if (snapshot.data?.status == Status.SUCCESS) {
+            return ListView.builder(
+                itemCount: snapshot.data!.data!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if (index == 4) print("AAA ${snapshot.data?.data[index]}");
+                  return Column(
+                    children: [
+                      NewsCard(
+                        article: snapshot.data!.data[index],
+                      ),
+                      const Divider(thickness: 1.0),
+                    ],
+                  );
+                });
+          }
+          return Container();
+        },
+      ));
 
-                    return NewsCard(
-                      article: snapshot.data?.data[index],
-                    );
-                  },
-                );
-              }
-              return Container();
-            }));
   }
 }

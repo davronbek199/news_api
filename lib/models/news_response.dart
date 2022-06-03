@@ -11,7 +11,7 @@ class NewsResponse {
     if (json['articles'] != null) {
       articles = <Articles>[];
       json['articles'].forEach((v) {
-        articles!.add(new Articles.fromJson(v));
+        articles?.add(new Articles.fromJson(v));
       });
     }
   }
@@ -21,7 +21,7 @@ class NewsResponse {
     data['status'] = this.status;
     data['totalResults'] = this.totalResults;
     if (this.articles != null) {
-      data['articles'] = this.articles!.map((v) => v.toJson()).toList();
+      data['articles'] = this.articles?.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -62,7 +62,7 @@ class Articles {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.source != null) {
-      data['source'] = this.source!.toJson();
+      data['source'] = this.source?.toJson();
     }
     data['author'] = this.author;
     data['title'] = this.title;
@@ -79,7 +79,7 @@ class Source {
   String? id;
   String? name;
 
-  Source({this.id, this.name});
+  Source(this.id, this.name);
 
   Source.fromJson(Map<String, dynamic> json) {
     id = json['id'];

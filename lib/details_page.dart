@@ -6,7 +6,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 class DetailsPage extends StatefulWidget {
 
   final Articles article;
-  const DetailsPage({Key? key, required this.article}) : super(key: key);
+
+  const DetailsPage({Key? key, required this.article, }) : super(key: key);
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -15,6 +16,7 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("News"),
@@ -23,7 +25,7 @@ class _DetailsPageState extends State<DetailsPage> {
         children: [
           Expanded(
             child: WebView(
-              initialUrl: 'https://flutter.io',
+              initialUrl: widget.article.url??"",
               javascriptMode: JavascriptMode.unrestricted,
             ),
           ),

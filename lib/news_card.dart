@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_api/models/news_response.dart';
 
@@ -37,7 +36,7 @@ class NewsCard extends StatelessWidget {
                         ));
                       },
                       child: Text(
-                        article.title!,
+                        article.title??"",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 5,
                         style: TextStyle(fontWeight: FontWeight.w700),

@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-
 import 'api_response.dart';
 import 'models/news_response.dart';
 
@@ -21,13 +20,13 @@ class MainProvider extends ChangeNotifier {
   }
 
   Future<ApiResponse> fetchNews() async {
-    String API_KEY = "892dbafa34774ca195c11d0f143339c2";
+    String ApiKey = "892dbafa34774ca195c11d0f143339c2";
 
     String url = "https://newsapi.org/v2/everything"
         "?q=tesla"
-        "&from=2022-05-01"
+        "&from=2022-06-03"
         "&sortBy=publishedAt"
-        "&apiKey=$API_KEY";
+        "&apiKey=$ApiKey";
 
     Uri myUrl = Uri.parse(url);
 
@@ -39,7 +38,7 @@ class MainProvider extends ChangeNotifier {
 
       articlesList = NewsResponse.fromJson(data).articles;
 
-      _apiResponse = ApiResponse.success(articlesList.toString());
+      _apiResponse = ApiResponse.success(articlesList);
     } catch (exception) {
       if (exception is SocketException) {
         _apiResponse = ApiResponse.error("No Internet Connection");
@@ -51,3 +50,5 @@ class MainProvider extends ChangeNotifier {
     return _apiResponse;
   }
 }
+
+//892dbafa34774ca195c11d0f143339c2
