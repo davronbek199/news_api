@@ -32,6 +32,7 @@ class MainProvider extends ChangeNotifier {
 
     try {
       var response = await http.get(myUrl);
+
       Map<String, dynamic> data = jsonDecode(response.body);
 
       articlesList?.clear();

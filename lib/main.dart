@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_api/home_menu.dart';
+import 'package:news_api/counter_page.dart';
+import 'package:news_api/counter_provider.dart';
 import 'package:news_api/main_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => MainProvider(),
       ),
+      ChangeNotifierProvider(create: (_) => CounterProvider()),
     ], child: MyApp()),
   );
 }
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: CounterPage(),
+      //HomePage(),
     );
   }
 }
